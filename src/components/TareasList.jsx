@@ -1,10 +1,25 @@
-const tareas = [
-    { id: 1, nombre: "Tarea 1", acabada: false },
-    { id: 2, nombre: "Tarea 2", acabada: true}
-]
+import { useEffect, useState } from "react";
+import { Tareas } from './Tarea';
 
-export default function TareasList() {
+export default function TareasList(onChangeTarea, onDeleteTarea) {
+
+    [tareas, setTareas] = useState();
+
+    [recargar, setRecargar] = useState(false);
+
+    // para cargar las tareas
+    useEffect(() => {
+        get("ruta", (data) => setTareas(data))
+        return () =>{}
+    }, [recargar, usuario])
+
     return(
-        <h1>Lista de tareas</h1>
+        <ul>
+            {tareas.map((tareas) => (
+                <li key={tareas.id}>
+                    <Tareas tareas={tareas} onChange={onChangeTarea} onDelete={onDeleteTarea}></Tareas>
+                </li>
+            ))}
+        </ul>
     )
 }
