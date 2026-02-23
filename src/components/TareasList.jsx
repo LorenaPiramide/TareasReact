@@ -10,7 +10,7 @@ export default function TareasList(onChangeTarea, onDeleteTarea) {
     // para cargar las tareas
     useEffect(() => {
         get("ruta", (data) => setTareas(data))
-        return () =>{}
+        return () =>{} // Limpieza del ¿servidor?
     }, [recargar, usuario])
 
     return(
