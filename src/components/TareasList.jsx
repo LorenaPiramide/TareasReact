@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react";
-import { Tareas } from './Tarea';
+import { Tarea } from './Tarea';
+// Función que hace el GET al servidor
+import { borrarTarea, obtenerTarea } from "../servicios/peticiones";
 
-export default function TareasList(onChangeTarea, onDeleteTarea) {
+export default function TareasList({ usuario }) {
 
-    [tareas, setTareas] = useState();
+    // Pedir tareas del usuario al servidor. Array vacío dentro porque el servidor devuelve un array
+    [tareas, setTareas] = useState([]);
 
+    // Forzar que se vuelvan a pedir las tareas. Carga los datos de nuevo cuando ha habido un cambio en las tareas. Ahora mismo no se usa el setRecargar porque no hay borrado
     [recargar, setRecargar] = useState(false);
 
-    // para cargar las tareas
+    // Para cargar las tareas. Ejecuta código cuando pasa algo
     useEffect(() => {
-        get("ruta", (data) => setTareas(data))
-        return () =>{} // Limpieza del ¿servidor?
-    }, [recargar, usuario])
+
+        obtenerTarea(usuario.id)
+            .then(data => setTareas(data)); // data -> Array de tareas. Se guardan en estado setTareas
+
+    }, [recargar, usuario]); // recargar -> Borrar/añadir tarea. usuario -> login/logout
+
+    // TODO: para borrar una tarea, habría que poner una función borrarTarea y pasar el id de la tarea por parámetro
+    
 
     return(
         <ul>
-            {tareas.map((tareas) => (
-                <li key={tareas.id}>
-                    <Tareas tareas={tareas} onChange={onChangeTarea} onDelete={onDeleteTarea}></Tareas>
+            {tareas.map(tarea => (
+                <li key={tarea.id}>
+                    <Tarea tarea={tarea} onDelete={() => borrarTarea(idTarea)}></Tarea>
                 </li>
             ))}
         </ul>

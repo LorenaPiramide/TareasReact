@@ -23,3 +23,9 @@ export function obtenerTarea(idUser) {
     return fetch(`${URL_SERVER}tareas?id_user=${idUser}`)
         .then(res => res.json());
 }
+
+export function borrarTarea(idTarea) {
+    return fetch(`${URL_SERVER}tareas/${id}`, {
+        method: "DELETE"
+    })
+}
