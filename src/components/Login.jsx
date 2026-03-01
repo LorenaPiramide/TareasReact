@@ -11,6 +11,10 @@ export default function Login({ setUsuario }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    // function setUsuarioLocalStorage(user){
+    //     localStorage.setItem(key, value)
+    // }
+
     return(
         <>
         {/* OnChange -> Cada vez que se modifica el campo. Sincronizamos el email con el valor en el campo */}

@@ -25,7 +25,7 @@ export function obtenerTarea(idUser) {
 }
 
 export function borrarTarea(idTarea) {
-    return fetch(`${URL_SERVER}tareas/${id}`, {
+    return fetch(`${URL_SERVER}tareas/${idTarea}`, {
         method: "DELETE"
     })
 }

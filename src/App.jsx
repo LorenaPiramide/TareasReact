@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar/Navbar'
 import { Outlet } from 'react-router';
 function App() {
 
@@ -9,12 +9,12 @@ function App() {
 
   // <button onClick={() => navigate("/")}>Ir a inicio</button>
 
-  // const [usuario, setUsuario] = useState(
-  //   JSON.parse(sessionStorage.getItem("usuario") || "null")
-  // );
+  const [usuario, setUsuario] = useState(
+    JSON.parse(sessionStorage.getItem("usuario") || "null")
+  );
 
   // FIXME: prueba para el usuario
-  const [usuario, setUsuario] = useState({nombre: "patata"});
+  // const [usuario, setUsuario] = useState({nombre: "patata"});
 
   return (
     <>
