@@ -18,7 +18,9 @@ export default function Login({ setUsuario }) {
     return(
         <>
         {/* OnChange -> Cada vez que se modifica el campo. Sincronizamos el email con el valor en el campo */}
+            <label>Email</label>
             <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label>Contraseña</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             
             <button onClick={() => {
