@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { registro } from "../servicios/peticiones"
+import { registro } from "../../servicios/peticiones"
 
 export default function Registro({ setUsuario }) {
 

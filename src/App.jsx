@@ -23,7 +23,6 @@ function App() {
       {/* Necesita el setter que va a guardar el usuario, si vamos al loggin, es que estamos setteando el usuario, ya que aun no hay uno logeado */}
       {/* (usuario.email ? <DatosUsuario usuario={usuario} setUsuario={setUsuario}/> : <Login setUsuario={setUsuario}/>) */}
 
-
       <Navbar usuario={usuario} setUsuario={setUsuario} />
       <Outlet context={{ usuario, setUsuario }} />
 
