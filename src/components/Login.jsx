@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { login } from "../../servicios/peticiones";
+import { login } from "../servicios/peticiones";
 
 // Input de nombre de usuario, de password y un botón con un onClick para enviar el formulario
 export default function Login({ setUsuario }) {
