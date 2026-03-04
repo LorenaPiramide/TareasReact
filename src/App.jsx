@@ -7,7 +7,7 @@ function App() {
   // <button onClick={() => navigate("/")}>Ir a inicio</button>
 
   const [usuario, setUsuario] = useState(
-    JSON.parse(sessionStorage.getItem("usuario") || "null")
+    JSON.parse(sessionStorage.getItem("usuario") || "{}")
   );
 
   return (

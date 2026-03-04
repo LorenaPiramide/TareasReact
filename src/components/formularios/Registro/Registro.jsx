@@ -5,7 +5,7 @@ import { useNavigate, useOutletContext } from "react-router";
 export default function Registro() {
 
     const navigate = useNavigate();
-    const [setUsuario]= useOutletContext();
+    const [usuario,setUsuario]= useOutletContext();
 
     const [emailRepetir, setEmailRepetir] = useState("");
     const [passwordRepetir, setPasswordRepetir] = useState("");
@@ -50,9 +50,9 @@ export default function Registro() {
                     <button onClick={() => {
                         registro(usuarioNuevo).then(data => {
                             alert("Usuario registrado correctamente.")
-                            setUsuario(data[0]);
-                            debugger;
-                            sessionStorage.setItem("usuario", JSON.stringify(data[0]));
+                             debugger;
+                            sessionStorage.setItem("usuario", JSON.stringify(data));
+                            setUsuario(data);
                             navigate("/");
                         })
                     }}>Registrarse</button>

@@ -1,45 +1,37 @@
 import { useEffect, useState } from "react";
-
+import { useOutletContext } from "react-router";
 // Función que hace el GET al servidor
 import { borrarTarea, obtenerTarea } from "../servicios/peticiones";
 
 export default function TareasList() {
 
-    // Pedir tareas del usuario al servidor. Array vacío dentro porque el servidor devuelve un array
-    // const [tareas, setTareas] = useState([]);
+    const [usuario] = useOutletContext();
+    const [tareas, setTareas] = useState([]);
+    const [recargar, setRecargar] = useState(false);
 
-    // Forzar que se vuelvan a pedir las tareas. Carga los datos de nuevo cuando ha habido un cambio en las tareas. Ahora mismo no se usa el setRecargar porque no hay borrado
-    // const [recargar, setRecargar] = useState(false);
-
-
-    const [usuario, setUsuario] = useOutletContextContext();
-
-    // Para cargar las tareas. Ejecuta código cuando pasa algo
-
-    // useEffect(() => {
-
-    //     obtenerTarea(usuario.id)
-    //         .then(data => setTareas(data)); // data -> Array de tareas. Se guardan en estado setTareas
-
-    // }, [recargar, usuario]); // recargar -> Borrar/añadir tarea. usuario -> login/logout
-
-    // TODO: para borrar una tarea, habría que poner una función borrarTarea y pasar el id de la tarea por parámetro
+    useEffect(() => {
+        obtenerTarea(usuario.id)
+            .then(data => setTareas(data));
+    }, [recargar, usuario]); // recargar -> Borrar/añadir tarea. usuario -> login/logout
     
 
     return(
         <>
             <h3>{usuario.nombre}, tienes estas tareas</h3>
-
             <button>Añadir tarea</button>
 
             <ul>
-                {tareas.map((tarea) => (
-                    <li key={tarea.id}>
-                        <Tareas tareas={tarea} onChange={onChangeTarea} onDelete={onDeleteTarea}></Tareas>
-                        <button onClick={() => onDelete(tarea.id)}>Borrar</button>
-                        <button>Editar</button>
-                    </li>
-                ))}
+                {tareas.length > 0 ? (
+                    tareas.map((tarea) => (
+                        <li key={tarea.id}>
+                            <span>{tarea.nombre}</span> 
+                            {/* <button onClick={() => onDelete(tarea.id)}>Borrar</button> */}
+                            <button>Editar</button>
+                        </li>
+                    ))
+                ) : (
+                    <p>No hay tareas pendientes.</p>
+                )}
             </ul>
         </>
     )

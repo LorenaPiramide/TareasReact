@@ -6,7 +6,7 @@ export default function Bienvenida() {
 
     return (
         <div>
-            {usuario ? (
+            {usuario.email ? (
                 <h3>Bienvenido de nuevo, {usuario.nombre}</h3>
             ) : (
                 <h3>Bienvenido/a a la aplicación de tareas.</h3>
