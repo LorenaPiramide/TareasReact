@@ -12,6 +12,14 @@ main {
     margin-bottom: 15px;
 }
 
+label {
+    margin-right: 5px;
+}
+
+.condiciones {
+    display: flex;
+}
+
 .boton {
     display: flex;
     justify-content: center;
