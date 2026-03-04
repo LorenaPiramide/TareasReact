@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router"
 
 export default function Bienvenida() {
 
-    const {usuario} = useOutletContext();
+    const [usuario] = useOutletContext();
 
     return (
         <div>

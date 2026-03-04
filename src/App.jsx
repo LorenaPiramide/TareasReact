@@ -15,7 +15,7 @@ function App() {
       <Navbar usuario={usuario} setUsuario={setUsuario} />
       {/* main es para poder meterle estilos directamente, sin necesidad de envolverlo en un div */}
       <main>
-        <Outlet context={{ usuario, setUsuario }} />
+        <Outlet context={[ usuario, setUsuario ]} />
       </main>
     </>
   )

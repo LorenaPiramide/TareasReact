@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // Función que hace el GET al servidor
 import { borrarTarea, obtenerTarea } from "../servicios/peticiones";
 
-export default function TareasList({ usuario }) {
+export default function TareasList() {
 
     // Pedir tareas del usuario al servidor. Array vacío dentro porque el servidor devuelve un array
     // const [tareas, setTareas] = useState([]);
@@ -12,7 +12,7 @@ export default function TareasList({ usuario }) {
     // const [recargar, setRecargar] = useState(false);
 
 
-    // const [usuario, setUsuario] = useOutletContextContext();
+    const [usuario, setUsuario] = useOutletContextContext();
 
     // Para cargar las tareas. Ejecuta código cuando pasa algo
 
@@ -32,7 +32,7 @@ export default function TareasList({ usuario }) {
 
             <button>Añadir tarea</button>
 
-            {/* <ul>
+            <ul>
                 {tareas.map((tarea) => (
                     <li key={tarea.id}>
                         <Tareas tareas={tarea} onChange={onChangeTarea} onDelete={onDeleteTarea}></Tareas>
@@ -40,7 +40,7 @@ export default function TareasList({ usuario }) {
                         <button>Editar</button>
                     </li>
                 ))}
-            </ul> */}
+            </ul>
         </>
     )
 }
