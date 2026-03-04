@@ -1,0 +1,24 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.formulario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.boton {
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+button {
+    background-color: black;
+    cursor: pointer;
+}
