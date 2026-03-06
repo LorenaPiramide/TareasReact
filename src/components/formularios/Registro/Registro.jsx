@@ -2,6 +2,7 @@ import { useState } from "react"
 import { registro } from "../../../servicios/peticiones"
 import { useNavigate, useOutletContext } from "react-router";
 
+// TODO: HACER LA VALIDACIÓN DEL LOGIN
 export default function Registro() {
 
     const navigate = useNavigate();
@@ -94,7 +95,7 @@ export default function Registro() {
         setErrores({ ...errores, password: error });
     }
 
-    const validarPasswordRepetida = (e) => {
+    const validarPasswordRepetir = (e) => {
         const valor = e.target.value;
         let error = "";
 
@@ -108,25 +109,49 @@ export default function Registro() {
     }
 
     const validarCondiciones = (e) => {
-        const valor = e.target.value;
+        const isChecked = e.target.checked;
         let error = "";
 
-        if(!valor.checked) {
+        if(!isChecked.checked) {
             error = "Debes aceptar las condiciones.";
         }
 
         setErrores({ ...errores, condiciones: error });
     }
+
+    const validarTodos = () => {
+        const erroresActuales = {
+            nombre: validarNombre({ target: { value: usuarioNuevo.nombre } }),
+            apellidos: validarApellidos({ target: { value: usuarioNuevo.apellidos } }),
+            email: validarEmail({ target: { value: usuarioNuevo.email } }),
+            emailRepetir: validarRepetirEmail({ target: { value: usuarioNuevo.emailRepetir } }),
+            password: validarPassword({ target: { value: usuarioNuevo.password } }),
+            passwordRepetir: validarPasswordRepetir({ target: { value: usuarioNuevo.passwordRepetir } }),
+
+            condiciones: validarCondiciones({ target: { checked: usuarioNuevo.condiciones } })
+        };
+        for (let campo in erroresActuales) {
+            if (erroresActuales[campo] !== "") {
+                return false; // Hay al menos un error
+            }
+        }
+        return true;
+    }
     
     const registrar = () => {
-        registro(usuarioNuevo).then(data => {
+        if (validarTodos()) {
+            registro(usuarioNuevo).then(data => {
             // FIXME: Creo que en el enunciado pone sin alerts
-            alert("Usuario registrado correctamente.")
+            // alert("Usuario registrado correctamente.")
             debugger;
             sessionStorage.setItem("usuario", JSON.stringify(data));
             setUsuario(data);
             navigate("/");
         })
+        } else {
+            alert("No funciona, pero arreglar el alert");
+        }
+        
     }
 
     return(
@@ -203,7 +228,7 @@ export default function Registro() {
                         type="password" 
                         value={passwordRepetir} 
                         onChange={(e) => setPasswordRepetir(e.target.value)}
-                        onBlur={validarPasswordRepetida}
+                        onBlur={validarPasswordRepetir}
                         className={errores.passwordRepetir ? "inputError" : ""}
                     />
                     <span className="errorMensaje">
