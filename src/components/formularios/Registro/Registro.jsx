@@ -49,8 +49,9 @@ export default function Registro() {
                 <div className="boton">
                     <button onClick={() => {
                         registro(usuarioNuevo).then(data => {
+                            // FIXME: Creo que en el enunciado pone sin alerts
                             alert("Usuario registrado correctamente.")
-                             debugger;
+                            debugger;
                             sessionStorage.setItem("usuario", JSON.stringify(data));
                             setUsuario(data);
                             navigate("/");

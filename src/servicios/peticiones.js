@@ -29,3 +29,11 @@ export function borrarTarea(idTarea) {
         method: "DELETE"
     })
 }
+
+export function crearTarea(tarea) {
+    return fetch(`${URL_SERVER}tareas`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tarea)
+    }).then(res => res.json())
+}
