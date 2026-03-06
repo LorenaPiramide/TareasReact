@@ -1,12 +1,13 @@
 import { useState } from "react"
 import { login } from "../../../servicios/peticiones";
 import "../form.css"
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 
 
 // Input de nombre de usuario, de password y un botón con un onClick para enviar el formulario
-export default function Login({ setUsuario }) {
+export default function Login() {
 
+    const [usuario, setUsuario] = useOutletContext();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -39,7 +40,8 @@ export default function Login({ setUsuario }) {
                             return;
                         }
 
-                        sessionStorage.setItem("usuario", JSON.stringify(data[0]))
+                        setUsuario(data[0]);
+                        sessionStorage.setItem("usuario", JSON.stringify(data[0]));
                         navigate("/");
                     })
                     

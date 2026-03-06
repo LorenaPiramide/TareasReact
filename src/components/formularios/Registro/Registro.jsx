@@ -5,7 +5,7 @@ import { useNavigate, useOutletContext } from "react-router";
 export default function Registro() {
 
     const navigate = useNavigate();
-    const [usuario,setUsuario]= useOutletContext();
+    const [usuario, setUsuario]= useOutletContext();
 
     const [emailRepetir, setEmailRepetir] = useState("");
     const [passwordRepetir, setPasswordRepetir] = useState("");
