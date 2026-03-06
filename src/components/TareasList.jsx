@@ -42,7 +42,11 @@ export default function TareasList() {
                     tareas.map((tarea) => (
                         <li key={tarea.id}>
                             <span>{tarea.nombre}</span>
-                            {/* <button onClick={() => onDelete(tarea.id)}>Borrar</button> */}
+                            <button onClick={() => {
+                                borrarTarea(tarea.id).then(() => {
+                                    setRecargar(!recargar)
+                                })
+                            }}>Borrar</button>
                             <button>Editar</button>
                         </li>
                     ))

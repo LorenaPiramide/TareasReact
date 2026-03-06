@@ -19,6 +19,14 @@ export function registro(usuario) {
     })
 }
 
+export function crearTarea(tarea) {
+    return fetch(`${URL_SERVER}tareas`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(tarea)
+    }).then(res => res.json())
+}
+
 export function obtenerTarea(idUser) {
     return fetch(`${URL_SERVER}tareas?id_user=${idUser}`)
         .then(res => res.json());
@@ -28,12 +36,4 @@ export function borrarTarea(idTarea) {
     return fetch(`${URL_SERVER}tareas/${idTarea}`, {
         method: "DELETE"
     })
-}
-
-export function crearTarea(tarea) {
-    return fetch(`${URL_SERVER}tareas`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(tarea)
-    }).then(res => res.json())
 }
