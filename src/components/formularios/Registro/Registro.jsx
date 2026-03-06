@@ -10,7 +10,32 @@ export default function Registro() {
     const [emailRepetir, setEmailRepetir] = useState("");
     const [passwordRepetir, setPasswordRepetir] = useState("");
     const [usuarioNuevo,setUsuarioNuevo] = useState({});
+
+    const [error, setError] = useState({
+        nombre: '',
+        apellidos: '',
+        email: '',
+        emailRepetir: '',
+        password: '',
+        passwordRepetir: '',
+        condiciones: false // No sé si esto va así
+    })
     
+    const registrar = () => {
+        
+        if (emailRepetir) {
+
+        }
+        registro(usuarioNuevo).then(data => {
+            // FIXME: Creo que en el enunciado pone sin alerts
+            alert("Usuario registrado correctamente.")
+            debugger;
+            sessionStorage.setItem("usuario", JSON.stringify(data));
+            setUsuario(data);
+            navigate("/");
+        })
+    }
+
     return(
         <>
             <div>
@@ -47,16 +72,7 @@ export default function Registro() {
                     <input type="checkbox" checked={usuarioNuevo.novedades} onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, novedades: e.target.checked })} />
                 </div>
                 <div className="boton">
-                    <button onClick={() => {
-                        registro(usuarioNuevo).then(data => {
-                            // FIXME: Creo que en el enunciado pone sin alerts
-                            alert("Usuario registrado correctamente.")
-                            debugger;
-                            sessionStorage.setItem("usuario", JSON.stringify(data));
-                            setUsuario(data);
-                            navigate("/");
-                        })
-                    }}>Registrarse</button>
+                    <button onClick={registrar}>Registrarse</button>
                 </div>
             </div>
         </>
