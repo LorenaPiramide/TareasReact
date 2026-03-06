@@ -112,7 +112,7 @@ export default function Registro() {
         const isChecked = e.target.checked;
         let error = "";
 
-        if(!isChecked.checked) {
+        if(!isChecked) {
             error = "Debes aceptar las condiciones.";
         }
 
@@ -127,9 +127,9 @@ export default function Registro() {
             emailRepetir: validarRepetirEmail({ target: { value: usuarioNuevo.emailRepetir } }),
             password: validarPassword({ target: { value: usuarioNuevo.password } }),
             passwordRepetir: validarPasswordRepetir({ target: { value: usuarioNuevo.passwordRepetir } }),
-
             condiciones: validarCondiciones({ target: { checked: usuarioNuevo.condiciones } })
         };
+        setErrores(erroresActuales);
         for (let campo in erroresActuales) {
             if (erroresActuales[campo] !== "") {
                 return false; // Hay al menos un error
@@ -143,7 +143,7 @@ export default function Registro() {
             registro(usuarioNuevo).then(data => {
             // FIXME: Creo que en el enunciado pone sin alerts
             // alert("Usuario registrado correctamente.")
-            debugger;
+            // debugger;
             sessionStorage.setItem("usuario", JSON.stringify(data));
             setUsuario(data);
             navigate("/");
@@ -151,7 +151,6 @@ export default function Registro() {
         } else {
             alert("No funciona, pero arreglar el alert");
         }
-        
     }
 
     return(
@@ -237,8 +236,8 @@ export default function Registro() {
                 </div>
                 <div className="formCheckbox">
                     <label>Condiciones</label>
-                    <input 
-                        type="checkbox" 
+                    <input
+                        type="checkbox"
                         checked={usuarioNuevo.condiciones} 
                         onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, condiciones: e.target.checked })}
                         onBlur={validarCondiciones}
@@ -249,7 +248,10 @@ export default function Registro() {
                 </div>
                 <div className="formCheckbox">
                     <label>Recibir novedades</label>
-                    <input type="checkbox" checked={usuarioNuevo.novedades} onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, novedades: e.target.checked })} />
+                    <input type="checkbox" 
+                        checked={usuarioNuevo.novedades} 
+                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, novedades: e.target.checked })}
+                    />
                 </div>
                 <div className="boton">
                     <button onClick={registrar}>Registrarse</button>
