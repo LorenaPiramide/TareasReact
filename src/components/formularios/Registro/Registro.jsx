@@ -106,6 +106,17 @@ export default function Registro() {
 
         setErrores({ ...errores, passwordRepetir: error });
     }
+
+    const validarCondiciones = (e) => {
+        const valor = e.target.value;
+        let error = "";
+
+        if(!valor.checked) {
+            error = "Debes aceptar las condiciones.";
+        }
+
+        setErrores({ ...errores, condiciones: error });
+    }
     
     const registrar = () => {
         registro(usuarioNuevo).then(data => {
@@ -201,7 +212,15 @@ export default function Registro() {
                 </div>
                 <div className="formCheckbox">
                     <label>Condiciones</label>
-                    <input type="checkbox" checked={usuarioNuevo.condiciones} onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, condiciones: e.target.checked })} />
+                    <input 
+                        type="checkbox" 
+                        checked={usuarioNuevo.condiciones} 
+                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, condiciones: e.target.checked })}
+                        onBlur={validarCondiciones}
+                    />
+                    <span className="errorMensaje">
+                        {errores.condiciones}
+                    </span>
                 </div>
                 <div className="formCheckbox">
                     <label>Recibir novedades</label>
