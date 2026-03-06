@@ -20,6 +20,11 @@ export default function Registro() {
         passwordRepetir: '',
         condiciones: false // No sé si esto va así
     })
+
+    function validarNombre(e) {
+        const nombre = e.target.value.trim();
+        const errorNombre = document.getElementById()
+    }
     
     const registrar = () => {
         
@@ -42,6 +47,7 @@ export default function Registro() {
                 <div className="formulario">
                     <label>Nombre</label>
                     <input type="text" value={usuarioNuevo.nombre} onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo,nombre:e.target.value})} />
+                    <span id="nombreError"></span>
                 </div>
                 <div className="formulario">
                     <label>Apellidos</label>
