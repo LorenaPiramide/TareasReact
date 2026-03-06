@@ -91,7 +91,20 @@ export default function Registro() {
             error = "La contraseña debe tener, al menos, 8 carácteres, incluyendo una letra mayúscula, una minúscula, un número y un carácter especial."
         }
 
-        setErrores({ ...errores, password:  error })
+        setErrores({ ...errores, password: error });
+    }
+
+    const validarPasswordRepetida = (e) => {
+        const valor = e.target.value;
+        let error = "";
+
+        if (!valor) {
+            error = "Repetir la contraseña es obligatorio.";
+        } else if (valor !== usuarioNuevo.password) {
+            error = "Las contraseñas no coinciden.";
+        }
+
+        setErrores({ ...errores, passwordRepetir: error });
     }
     
     const registrar = () => {
@@ -175,7 +188,16 @@ export default function Registro() {
                 </div>
                 <div className="formulario">
                     <label>Repetir contraseña</label>
-                    <input type="password" value={passwordRepetir} onChange={(e) => setPasswordRepetir(e.target.value)} />
+                    <input 
+                        type="password" 
+                        value={passwordRepetir} 
+                        onChange={(e) => setPasswordRepetir(e.target.value)}
+                        onBlur={validarPasswordRepetida}
+                        className={errores.passwordRepetir ? "inputError" : ""}
+                    />
+                    <span className="errorMensaje">
+                        {errores.passwordRepetir}
+                    </span>
                 </div>
                 <div className="formCheckbox">
                     <label>Condiciones</label>
