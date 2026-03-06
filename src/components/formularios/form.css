@@ -30,3 +30,7 @@ button {
     background-color: black;
     cursor: pointer;
 }
+
+.input_error {
+    border: 1px solid red;
+}

@@ -11,26 +11,32 @@ export default function Registro() {
     const [passwordRepetir, setPasswordRepetir] = useState("");
     const [usuarioNuevo,setUsuarioNuevo] = useState({});
 
-    const [error, setError] = useState({
-        nombre: '',
-        apellidos: '',
-        email: '',
-        emailRepetir: '',
-        password: '',
-        passwordRepetir: '',
-        condiciones: false // No sé si esto va así
+    const [errores, setErrores] = useState({
+        nombre: "",
+        apellidos: "",
+        email: "",
+        emailRepetir: "",
+        password: "",
+        passwordRepetir: "",
+        condiciones: ""
     })
 
-    function validarNombre(e) {
-        const nombre = e.target.value.trim();
-        const errorNombre = document.getElementById()
+    const validarNombre = (e) => {
+        const valor = e.target.value;
+        let error = "";
+
+        if (!valor || valor.trim() === "") {
+            error = "El nombre es obligatorio";
+        } else if (valor.length < 3) {
+            error = "El nombre debe tener al menos 3 caracteres";
+        } else if (valor[0] !== valor[0].toUpperCase()) {
+            error = "El nombre debe empezar por mayúscula";
+        }
+
+        setErrores({ ...errores, nombre: error });
     }
     
     const registrar = () => {
-        
-        if (emailRepetir) {
-
-        }
         registro(usuarioNuevo).then(data => {
             // FIXME: Creo que en el enunciado pone sin alerts
             alert("Usuario registrado correctamente.")
@@ -46,8 +52,16 @@ export default function Registro() {
             <div>
                 <div className="formulario">
                     <label>Nombre</label>
-                    <input type="text" value={usuarioNuevo.nombre} onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo,nombre:e.target.value})} />
-                    <span id="nombreError"></span>
+                    <input 
+                        type="text" 
+                        value={usuarioNuevo.nombre} 
+                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo,nombre:e.target.value})}
+                        onBlur={validarNombre}
+                        className={errores.nombre ? "input_error" : ""} // Hay que hacer un input_error en css para poner el borde de input en rojo
+                    />
+                    <span id="nombreError" className="error_mensaje">
+                        {errores.nombre} {/* Aquí se muestra el mensaje de error */}
+                    </span>
                 </div>
                 <div className="formulario">
                     <label>Apellidos</label>
