@@ -3,7 +3,7 @@ import './index.css'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import Login from './components/formularios/Login/Login.jsx'
 import Registro from './components/formularios/Registro/Registro.jsx'
-import TareasList from './components/TareasList.jsx'
+import TareasList from './components/tareas/TareasList.jsx'
 import Bienvenida from './components/Bienvenida.jsx'
 
 import App from './App.jsx'
