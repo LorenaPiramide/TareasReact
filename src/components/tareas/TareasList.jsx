@@ -19,6 +19,7 @@ export default function TareasList() {
     const [errores, setErrores] = useState({
         nombre: "",
     })
+    const[errorActualizacion, setErrorActualizacion] = useState({});
 
     useEffect(() => {
         if (!usuario || !usuario.id) {
@@ -32,16 +33,46 @@ export default function TareasList() {
     }, [recargar, usuario]); // recargar -> Borrar/añadir tarea. usuario -> login/logout
 
     const cambiarCheckbox = (tarea) => {
+        // Guardamos el estado original por si hay que revertir el cambio
+        // const estadoOriginal = tarea.acabada;
+
+        // Cambio visual
         const tareaActualizada = {
             ...tarea,
             acabada: !tarea.acabada
         };
 
+        // Se actualiza el estado local
+        setTareas(tareas.map(task => 
+            task.id === tarea.id ? tareaActualizada : task
+        ));
+
+        const nuevosErrores = {};
+
+        // Copia de errores que no son de esa tarea
+        for (let id in errorActualizacion) {
+            if (id !== tarea.id) {
+                nuevosErrores[id] = errorActualizacion[id];
+            }
+        }
+
+        setErrorActualizacion(nuevosErrores);
+
         actualizarAcabada(tarea.id, tareaActualizada).then(() => {
-            setTareas(tareas.map(task => 
-                task.id === tarea.id ? tareaActualizada : task
+            console.log("Tarea actualizada correctamente.")
+        }).catch(error => {
+            console.log("Error al actualizar la tarea: ", error);
+
+            // Revertimos el cambio visual
+            setTareas(tareas.map(task =>
+                task.id === tarea.id ? tarea : task
             ));
-        });
+
+            setErrorActualizacion(previo => ({
+                ...previo,
+                [tarea.id]: `Error al actualizar la tarea "${tarea.nombre}"`
+            }));
+        })
     }
 
     if (!usuario || !usuario.id) return null;
@@ -114,6 +145,11 @@ export default function TareasList() {
                                     })
                                 }}>Borrar</button>
                                 {/* <button>Editar</button> */}
+                                {errorActualizacion[tarea.id] && (
+                                    <div className="tareaErrorMensaje">
+                                        <span>{errorActualizacion[tarea.id]}</span>
+                                    </div>
+                                )}
                             </li>
                         ))
                     ) : (
