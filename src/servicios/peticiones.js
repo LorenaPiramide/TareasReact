@@ -27,8 +27,8 @@ export function crearTarea(tarea) {
     }).then(res => res.json())
 }
 
-export function obtenerTarea(idUser) {
-    return fetch(`${URL_SERVER}tareas?id_user=${idUser}`)
+export function obtenerTarea(id_user) {
+    return fetch(`${URL_SERVER}tareas?id_user=${id_user}`)
         .then(res => res.json());
 }
 
@@ -36,4 +36,15 @@ export function borrarTarea(idTarea) {
     return fetch(`${URL_SERVER}tareas/${idTarea}`, {
         method: "DELETE"
     })
+}
+
+export function actualizarAcabada(idTarea, tareaActualizada) {
+    return fetch(`${URL_SERVER}tareas/${idTarea}`, {
+        method: "PATCH",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(tareaActualizada)
+    }).then(res => {
+        if (!res.ok) throw new Error("No se ha podido actualizar la tarea.");
+        return res.json();
+    });
 }

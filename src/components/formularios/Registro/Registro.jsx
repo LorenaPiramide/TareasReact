@@ -35,6 +35,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, nombre: error });
+        return error;
     }
 
     // TODO: Creo que se puede hacer de otra forma
@@ -51,6 +52,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, apellidos: error });
+        return error;
     }
 
     // TODO: Comprobar si el email ya está registrado o no
@@ -66,6 +68,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, email: error });
+        return error;
     }
 
     const validarRepetirEmail = (e) => {
@@ -79,6 +82,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, emailRepetir: error })
+        return error;
     }
 
     const validarPassword = (e) => {
@@ -93,6 +97,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, password: error });
+        return error;
     }
 
     const validarPasswordRepetir = (e) => {
@@ -106,6 +111,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, passwordRepetir: error });
+        return error;
     }
 
     const validarCondiciones = (e) => {
@@ -117,6 +123,7 @@ export default function Registro() {
         }
 
         setErrores({ ...errores, condiciones: error });
+        return error;
     }
 
     const validarTodos = () => {
@@ -124,9 +131,9 @@ export default function Registro() {
             nombre: validarNombre({ target: { value: usuarioNuevo.nombre } }),
             apellidos: validarApellidos({ target: { value: usuarioNuevo.apellidos } }),
             email: validarEmail({ target: { value: usuarioNuevo.email } }),
-            emailRepetir: validarRepetirEmail({ target: { value: usuarioNuevo.emailRepetir } }),
+            emailRepetir: validarRepetirEmail({ target: { value: emailRepetir } }),
             password: validarPassword({ target: { value: usuarioNuevo.password } }),
-            passwordRepetir: validarPasswordRepetir({ target: { value: usuarioNuevo.passwordRepetir } }),
+            passwordRepetir: validarPasswordRepetir({ target: { value: passwordRepetir } }),
             condiciones: validarCondiciones({ target: { checked: usuarioNuevo.condiciones } })
         };
         setErrores(erroresActuales);
@@ -141,15 +148,10 @@ export default function Registro() {
     const registrar = () => {
         if (validarTodos()) {
             registro(usuarioNuevo).then(data => {
-            // FIXME: Creo que en el enunciado pone sin alerts
-            // alert("Usuario registrado correctamente.")
-            // debugger;
-            sessionStorage.setItem("usuario", JSON.stringify(data));
-            setUsuario(data);
-            navigate("/");
-        })
-        } else {
-            alert("No funciona, pero arreglar el alert");
+                sessionStorage.setItem("usuario", JSON.stringify(data));
+                setUsuario(data);
+                navigate("/");
+            })
         }
     }
 
