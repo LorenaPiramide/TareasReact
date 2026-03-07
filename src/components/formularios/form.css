@@ -5,28 +5,51 @@ main {
     min-height: 90vh;
 }
 
+.errorMensaje {
+    margin-top: 3px;
+}
+
+.contenedorFormulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
 .formulario {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
 }
 
-label {
-    margin-right: 5px;
+.formulario label {
+  margin-bottom: 5px;
 }
 
-.formCheckbox {
-    display: flex;
+.campoInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.boton {
-    display: flex;
-    justify-content: center;
-    color: black;
+.campoInput input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
-button {
-    background-color: black;
-    cursor: pointer;
+.inputError {
+  border: 1px solid red;
+}
+
+.errorMensaje {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 3px;
 }

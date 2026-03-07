@@ -160,81 +160,98 @@ export default function Registro() {
             <div>
                 <div className="formulario">
                     <label>Nombre</label>
-                    <input 
-                        type="text" 
-                        value={usuarioNuevo.nombre} 
-                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo,nombre:e.target.value})}
-                        onBlur={validarNombre}
-                        className={errores.nombre ? "inputError" : ""} // Hay que hacer un input_error en css para poner el borde de input en rojo
-                    />
-                    {/* TODO: Me parece que no necesito el id del span */}
-                    <span className="errorMensaje">
-                        {errores.nombre} {/* Mensaje del return del error */}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="text"
+                            value={usuarioNuevo.nombre}
+                            onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, nombre: e.target.value })}
+                            onBlur={validarNombre}
+                            className={errores.nombre ? "inputError" : ""} // Hay que hacer un input_error en css para poner el borde de input en rojo
+                        />
+                        <span className="errorMensaje">
+                            {errores.nombre} {/* Mensaje del return del error */}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formulario">
                     <label>Apellidos</label>
-                    <input 
-                        type="text" 
-                        value={usuarioNuevo.apellidos} 
-                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, apellidos: e.target.value })}
-                        onBlur={validarApellidos}
-                        className={errores.apellidos ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.apellidos}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="text"
+                            value={usuarioNuevo.apellidos}
+                            onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, apellidos: e.target.value })}
+                            onBlur={validarApellidos}
+                            className={errores.apellidos ? "inputError" : ""}
+                        />
+                        <span className="errorMensaje">
+                            {errores.apellidos}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formulario">
                     <label>Email</label>
-                    <input 
-                        type="text" value={usuarioNuevo.email} 
-                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, email: e.target.value })}
-                        onBlur={validarEmail}
-                        className={errores.email ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.email}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="text" value={usuarioNuevo.email}
+                            onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, email: e.target.value })}
+                            onBlur={validarEmail}
+                            className={errores.email ? "inputError" : ""}
+                        />
+                        <span className="errorMensaje">
+                            {errores.email}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formulario">
                     <label>Repetir email</label>
-                    <input 
-                        type="text" 
-                        value={emailRepetir} 
-                        onChange={(e) => setEmailRepetir(e.target.value)}
-                        onBlur={validarRepetirEmail}
-                        className={errores.emailRepetir ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.emailRepetir}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="text"
+                            value={emailRepetir}
+                            onChange={(e) => setEmailRepetir(e.target.value)}
+                            onBlur={validarRepetirEmail}
+                            className={errores.emailRepetir ? "inputError" : ""}
+                        />
+                        <span className="errorMensaje">
+                            {errores.emailRepetir}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formulario">
                     <label>Contraseña</label>
-                    <input 
-                        type="password" 
-                        value={usuarioNuevo.password} 
-                        onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, password: e.target.value })}
-                        onBlur={validarPassword}
-                        className={errores.password ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.password}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="password"
+                            value={usuarioNuevo.password}
+                            onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, password: e.target.value })}
+                            onBlur={validarPassword}
+                            className={errores.password ? "inputError" : ""}
+                        />
+                        <span className="errorMensaje">
+                            {errores.password}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formulario">
                     <label>Repetir contraseña</label>
-                    <input 
-                        type="password" 
-                        value={passwordRepetir} 
-                        onChange={(e) => setPasswordRepetir(e.target.value)}
-                        onBlur={validarPasswordRepetir}
-                        className={errores.passwordRepetir ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.passwordRepetir}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="password"
+                            value={passwordRepetir}
+                            onChange={(e) => setPasswordRepetir(e.target.value)}
+                            onBlur={validarPasswordRepetir}
+                            className={errores.passwordRepetir ? "inputError" : ""}
+                        />
+                        <span className="errorMensaje">
+                            {errores.passwordRepetir}
+                        </span>
+                    </div>
+                    
                 </div>
                 <div className="formCheckbox">
                     <label>Condiciones</label>

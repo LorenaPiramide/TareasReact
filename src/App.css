@@ -41,3 +41,17 @@ h1 {
 input {
   border-radius: 8px;
 }
+
+button {
+    padding: 8px 12px;
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100px;
+}
+
+button:hover {
+    color: burlywood;
+}

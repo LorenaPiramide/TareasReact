@@ -55,7 +55,7 @@ export default function TareasList() {
                 {mostrarForm ? (
                     <>
                         <div className="formularioNuevaTarea">
-                            <div className="campoInput">
+                            <div className="tareaCampoInput">
                                 <input
                                     type="text"
                                     placeholder="Nombre de la tarea"
@@ -71,7 +71,7 @@ export default function TareasList() {
                                 />
                             </div>
 
-                            {errores.nombre ? <span className="errorMensaje">{errores.nombre}</span> : null}
+                            {errores.nombre ? <span className="tareaErrorMensaje">{errores.nombre}</span> : null}
                             <button onClick={() => {
                                 if (!tareaNueva.nombre) {
                                     setErrores({ ...errores, nombre: "La tarea debe tener un nombre." });

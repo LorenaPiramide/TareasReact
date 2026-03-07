@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { login, registro } from "../../../servicios/peticiones";
+import { login } from "../../../servicios/peticiones";
 import "../form.css"
 import { useNavigate, useOutletContext } from "react-router";
 
@@ -85,31 +85,32 @@ export default function Login() {
         <>
         {/* OnChange -> Cada vez que se modifica el campo. 
         Sincronizamos el email con el valor en el campo */}
-            <div>
+            <div className="contenedorFormulario">
                 <div className="formulario">
                     <label>Email</label>
-                    <input type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onBlur={comprobarEmail}
-                        className={errores.email ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.email}
-                    </span>
+                    <div className="campoInput">
+                        <input type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onBlur={comprobarEmail}
+                            className={errores.email ? "inputError" : ""}
+                        />
+                        {/* Esto es como una ternaria */}
+                        {errores.email && <span className="errorMensaje">{errores.email}</span>}
+                    </div>
                 </div>
                 
                 <div className="formulario">
                     <label>Contraseña</label>
-                    <input 
-                        type="password"
-                        value={password} onChange={(e) => setPassword(e.target.value)}
-                        onBlur={comprobarPassword}
-                        className={errores.password ? "inputError" : ""}
-                    />
-                    <span className="errorMensaje">
-                        {errores.password}
-                    </span>
+                    <div className="campoInput">
+                        <input
+                            type="password"
+                            value={password} onChange={(e) => setPassword(e.target.value)}
+                            onBlur={comprobarPassword}
+                            className={errores.password ? "inputError" : ""}
+                        />
+                        {errores.password && <span className="errorMensaje">{errores.password}</span>}
+                    </div>
                 </div>
                 
                 <button onClick={iniciarSesion}>Login</button>
