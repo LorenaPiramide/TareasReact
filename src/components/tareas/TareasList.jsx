@@ -16,9 +16,11 @@ export default function TareasList() {
         acabada: false,
         id_user: usuario.id
     });
+
     const [errores, setErrores] = useState({
         nombre: "",
     })
+
     const[errorActualizacion, setErrorActualizacion] = useState({});
 
     useEffect(() => {
@@ -33,23 +35,23 @@ export default function TareasList() {
     }, [recargar, usuario]); // recargar -> Borrar/añadir tarea. usuario -> login/logout
 
     const cambiarCheckbox = (tarea) => {
-        // Guardamos el estado original por si hay que revertir el cambio
-        // const estadoOriginal = tarea.acabada;
-
         // Cambio visual
         const tareaActualizada = {
+            // Copia
             ...tarea,
+            // Valor opuesto
             acabada: !tarea.acabada
         };
 
-        // Se actualiza el estado local
+        // Búsca la tarea y la actualiza. Local
         setTareas(tareas.map(task => 
             task.id === tarea.id ? tareaActualizada : task
         ));
 
+        // Para guardar los errores
         const nuevosErrores = {};
 
-        // Copia de errores que no son de esa tarea
+        // Recorremos los errores y si el error es de la tarea actual se elimina, para actualizarla de nuevo
         for (let id in errorActualizacion) {
             if (id !== tarea.id) {
                 nuevosErrores[id] = errorActualizacion[id];
@@ -68,8 +70,10 @@ export default function TareasList() {
                 task.id === tarea.id ? tarea : task
             ));
 
+            // Se guarda el error para mostrarlo por pantalla
             setErrorActualizacion(previo => ({
                 ...previo,
+                // Se guarda el error usando el id de la tarea
                 [tarea.id]: `Error al actualizar la tarea "${tarea.nombre}"`
             }));
         })

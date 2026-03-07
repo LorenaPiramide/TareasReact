@@ -3,8 +3,6 @@ import { login } from "../../../servicios/peticiones";
 import "../form.css"
 import { useNavigate, useOutletContext } from "react-router";
 
-
-// Input de nombre de usuario, de password y un botón con un onClick para enviar el formulario
 export default function Login() {
 
     const [usuario, setUsuario] = useOutletContext();
@@ -17,6 +15,7 @@ export default function Login() {
         password: ""
     });
 
+    // Se comprueba un único campo
     const comprobarEmail = (e) => {
         const valor = e.target.value;
         let error = "";
@@ -39,22 +38,8 @@ export default function Login() {
         setErrores({ ...errores, password: error })
     }
 
-    // const validarTodos = () => {
-    //     // Limpiamos los errores antiguos
-    //     setErrores({ email: "", password: "" })
-    //     const erroresActuales = {
-    //         email: comprobarEmail({ target: { value: usuario.email } }),
-    //         password: comprobarPassword({ target: { value: usuario.password } })
-    //     }
-    //     for (let campo in errores) {
-    //         if (erroresActuales[campo] !== "") {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-
     const iniciarSesion = () => {
+        // Al clickar en el botón login
         const erroresActuales = {
             email: !email ? "Debes poner un email." : "",
             password: !password ? "Debes poner una contraseña." : ""
@@ -62,6 +47,7 @@ export default function Login() {
 
         setErrores(erroresActuales);
 
+        // Comprobamos la información básica del formulario
         if (!erroresActuales.email && !erroresActuales.password) {
             login(email).then(data => {
                 if (data.length === 0) {
@@ -95,7 +81,7 @@ export default function Login() {
                             onBlur={comprobarEmail}
                             className={errores.email ? "inputError" : ""}
                         />
-                        {/* Esto es como una ternaria */}
+                        {/* Si errores.email es verdadero y tiene errores, muestra el mensaje. Sería lo mismo que poner una ternaria. */}
                         {errores.email && <span className="errorMensaje">{errores.email}</span>}
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { registro } from "../../../servicios/peticiones"
+import { comprobarExistenciaEmail, registro } from "../../../servicios/peticiones"
 import { useNavigate, useOutletContext } from "react-router";
 
 // TODO: HACER LA VALIDACIÓN DEL LOGIN
@@ -55,7 +55,6 @@ export default function Registro() {
         return error;
     }
 
-    // TODO: Comprobar si el email ya está registrado o no
     const validarEmail = (e) => {
         const regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
         const valor = e.target.value;
@@ -69,6 +68,21 @@ export default function Registro() {
 
         setErrores({ ...errores, email: error });
         return error;
+    }
+
+    const validarEmailServidor = (e) => {
+        comprobarExistenciaEmail(e).then(existe => {
+            if (existe) {
+                // previo -> Estado anterior. ...previo -> copia todo. email: cambio del campo que queremos
+                setErrores(previo => ({ ...previo, email: "El email ya está registrado." }));
+            } else {
+                // Si no existe, limpiamos el error
+                setErrores(previo => ({ ...previo, email: "" }));
+            }
+        }).catch(err => {
+            console.error(err);
+            setErrores(previo => ({ ...previo, email: "No se ha podido comprobar el email. "}));
+        })
     }
 
     const validarRepetirEmail = (e) => {
@@ -126,6 +140,7 @@ export default function Registro() {
         return error;
     }
 
+    // Validación local, por eso en el de validarEmailServidor no se pone aquí, porque es del servidor
     const validarTodos = () => {
         const erroresActuales = {
             nombre: validarNombre({ target: { value: usuarioNuevo.nombre } }),
@@ -196,7 +211,11 @@ export default function Registro() {
                         <input
                             type="text" value={usuarioNuevo.email}
                             onChange={(e) => setUsuarioNuevo({ ...usuarioNuevo, email: e.target.value })}
-                            onBlur={validarEmail}
+                            onBlur={(e) => {
+                                validarEmail(e);
+                                // e.target.value porque espera el valor del input directamente
+                                validarEmailServidor(e.target.value);
+                            }}
                             className={errores.email ? "inputError" : ""}
                         />
                         <span className="errorMensaje">

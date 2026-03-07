@@ -48,3 +48,12 @@ export function actualizarAcabada(idTarea, tareaActualizada) {
         return res.json();
     });
 }
+
+export function comprobarExistenciaEmail(email) {
+    return fetch(`${URL_SERVER}usuarios?email=${encodeURIComponent(email)}`)
+        .then(res => {
+            if (!res.ok) throw new Error("No se ha podido conectar con el servidor.");
+            return res.json();
+        })
+        .then(data => data.length > 0); // Si existe, es true
+}
